@@ -346,13 +346,15 @@ extension AssetsPhotoViewController {
     
     func select(album: PHAssetCollection) {
         if AssetsManager.shared.select(album: album) {
+            collectionView.reloadData()
+
             // set title with selected count if exists
             if selectedArray.count > 0 {
                 updateNavigationStatus()
             } else {
                 title = title(forAlbum: album)
             }
-            collectionView.reloadData()
+            
             
             for asset in selectedArray {
                 if let index = AssetsManager.shared.assetArray.index(of: asset) {
